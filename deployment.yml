@@ -16,10 +16,10 @@ spec:
       - name: pedidos
         image: 439667737553.dkr.ecr.us-east-1.amazonaws.com/pedidos-repo:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env:
         - name: ASPNETCORE_URLS
-          value: http://*:80
+          value: http://*:8080
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
         - name: ConnectionStrings__DefaultConnection

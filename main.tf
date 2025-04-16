@@ -67,7 +67,7 @@ resource "kubernetes_secret" "app_secrets" {
   }
 
   data = {
-    DefaultConnection = base64encode("Server=mysql-pedidos.cy3tr8ibv02w.us-east-1.rds.amazonaws.com;Port=3306;Database=pedidos_db;User=admin;Password=Teste#Teste;")
+    DefaultConnection = "Server=mysql-pedidos.cy3tr8ibv02w.us-east-1.rds.amazonaws.com;Port=3306;Database=pedidos_db;User=admin;Password=Teste#Teste;"
   }
 
   type = "Opaque"
