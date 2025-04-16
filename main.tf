@@ -28,6 +28,14 @@ resource "aws_eks_cluster" "pedidos" {
   vpc_config {
     subnet_ids = data.aws_subnets.da_vpc.ids
   }
+
+  lifecycle {
+    prevent_destroy = true # Evita que o Terraform destrua um cluster em produção por acidente
+  }
+
+  tags = {
+    Name = "pedidos-cluster"
+  }    
 }
 
 # Cria o node group
