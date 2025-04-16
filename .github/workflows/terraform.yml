@@ -36,20 +36,33 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
+    - name: 🪣 Verificar/criar bucket S3
+      run: |
+        BUCKET_NAME=bucket-pedidos-terraform
+        REGION=us-east-1
+    
+        echo "🔍 Verificando se bucket $BUCKET_NAME já existe..."
+        if aws s3api head-bucket --bucket "$BUCKET_NAME" 2>/dev/null; then
+            echo "✅ Bucket $BUCKET_NAME já existe."
+        else
+            echo "🚀 Criando bucket $BUCKET_NAME..."
+            
+            if [ "$REGION" = "us-east-1" ]; then
+            aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$REGION"
+            else
+            aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$REGION" \
+                --create-bucket-configuration LocationConstraint="$REGION"
+            fi
+        fi
+
     - name: 📁 Inicializar Terraform
       run: terraform init
-    
-    - name: 📁 Tenta importar o clues se já existir
-      run: terraform import aws_eks_cluster.pedidos pedidos-cluster || echo "Cluster não existe, será criado..."
 
     - name: 🧪 Verificar estado do Terraform
       run: terraform state list
 
     - name: 🧪 Validar Terraform
-      run: terraform validate  
-      
-    - name: 📋 Planejar Terraform
-      run: terraform plan -out=tfplan -target=aws_eks_cluster.pedidos      
+      run: terraform validate   
 
     - name: 📋 Planejar Terraform
       run: terraform plan -out=tfplan

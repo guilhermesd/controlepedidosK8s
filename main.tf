@@ -70,6 +70,7 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_secret" "app_secrets" {
+
   metadata {
     name = "app-secrets"
   }
@@ -87,6 +88,7 @@ resource "null_resource" "apply_k8s_yamls" {
   }
 
   provisioner "local-exec" {
+
     interpreter = ["bash", "-c"]
     command = <<EOT
       echo "📡 Atualizando kubeconfig..."
