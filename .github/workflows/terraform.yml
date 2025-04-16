@@ -44,12 +44,12 @@ jobs:
 
     - name: 🧪 Verificar estado do Terraform
       run: terraform state list
-    
-    - name: 🔄 Sincronizar estado do Terraform
-      run: terraform refresh
 
     - name: 🧪 Validar Terraform
-      run: terraform validate
+      run: terraform validate  
+      
+    - name: 📋 Planejar Terraform
+      run: terraform plan -out=tfplan -target=aws_eks_cluster.pedidos      
 
     - name: 📋 Planejar Terraform
       run: terraform plan -out=tfplan
