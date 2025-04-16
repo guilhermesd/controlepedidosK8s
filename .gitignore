@@ -1,0 +1,46 @@
+# === Terraform ===
+*.tfstate
+*.tfstate.backup
+*.tfplan
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.tfvars.lock.json
+
+# Arquivos de variáveis sensíveis
+terraform.tfvars
+*.auto.tfvars
+
+# === Kubernetes ===
+.kube/
+*.yaml~
+*.yml~
+*.log
+*.tmp
+*.bak
+
+# Arquivos de contexto ou configurados localmente
+kubeconfig
+kubeconfig.yaml
+kubeconfig.yml
+.kubeconfig
+
+# === IDEs ===
+.vscode/
+.idea/
+*.swp
+
+# === Sistema operacional ===
+.DS_Store
+Thumbs.db
+
+# === Logs e temporários ===
+*.log
+*.out
+*.err
+*.tmp
+*.bak

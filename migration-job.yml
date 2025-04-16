@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: migration
+        image: 439667737553.dkr.ecr.us-east-1.amazonaws.com/migration-repo:latest
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: DefaultConnection
+        # Se precisar de mais variáveis, adicione aqui
+      restartPolicy: Never
+  backoffLimit: 1
