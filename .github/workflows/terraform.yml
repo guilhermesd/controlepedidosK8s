@@ -38,6 +38,9 @@ jobs:
 
     - name: 📁 Inicializar Terraform
       run: terraform init
+    
+    - name: 📁 Tenta importar o clues se já existir
+      run: terraform import aws_eks_cluster.pedidos pedidos-cluster || echo "Cluster não existe, será criado..."
 
     - name: 🧪 Validar Terraform
       run: terraform validate
