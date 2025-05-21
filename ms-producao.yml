@@ -1,0 +1,39 @@
+# MICRO SERVIÇO PRODUCAO
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicoproducao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicoproducao
+  template:
+    metadata:
+      labels:
+        app: servicoproducao
+    spec:
+      containers:
+      - name: servicoproducao
+        image: 100527548163.dkr.ecr.us-east-1.amazonaws.com/servicoproducao-repo:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:8080
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicoproducao
+spec:
+  type: LoadBalancer
+  selector:
+     app: servicoproducao
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

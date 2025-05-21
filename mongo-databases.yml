@@ -1,0 +1,173 @@
+# MONGO - PEDIDOS
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pedidos-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-pedidos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-pedidos
+  template:
+    metadata:
+      labels:
+        app: mongo-pedidos
+    spec:
+      containers:
+        - name: mongo-pedidos
+          image: mongo:6.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-pedidos-storage
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: example
+      volumes:
+        - name: mongo-pedidos-storage
+          persistentVolumeClaim:
+            claimName: mongo-pedidos-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-pedidos-service
+spec:
+  selector:
+    app: mongo-pedidos
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP
+
+# MONGO - PAGAMENTOS
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pagamentos-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-pagamentos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-pagamentos
+  template:
+    metadata:
+      labels:
+        app: mongo-pagamentos
+    spec:
+      containers:
+        - name: mongo-pagamentos
+          image: mongo:6.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-pagamentos-storage
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: example
+      volumes:
+        - name: mongo-pagamentos-storage
+          persistentVolumeClaim:
+            claimName: mongo-pagamentos-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-pagamentos-service
+spec:
+  selector:
+    app: mongo-pagamentos
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP
+
+# MONGO - PRODUCAO
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-producao-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-producao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-producao
+  template:
+    metadata:
+      labels:
+        app: mongo-producao
+    spec:
+      containers:
+        - name: mongo-producao
+          image: mongo:6.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-producao-storage
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: example
+      volumes:
+        - name: mongo-producao-storage
+          persistentVolumeClaim:
+            claimName: mongo-producao-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-producao-service
+spec:
+  selector:
+    app: mongo-producao
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP

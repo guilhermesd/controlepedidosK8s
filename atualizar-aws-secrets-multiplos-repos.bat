@@ -12,7 +12,7 @@ for /f "tokens=1,2 delims==" %%A in ('findstr /i /r "aws_access_key_id= aws_secr
 )
 
 :: Lista de repositórios separada por espaço
-set "REPOS=guilhermesd/controlepedidos guilhermesd/controlepedidosdb guilhermesd/controlepedidosK8s"
+set "REPOS=guilhermesd/controlepedidos guilhermesd/controlepedidosdb guilhermesd/controlepedidosK8s guilhermesd/servicopedidos guilhermesd/servicopagamentos guilhermesd/servicoproducao guilhermesd/pedidos-api-gateway-lambda"
 
 :: Loop pelos repositórios
 for %%R in (%REPOS%) do (
