@@ -101,7 +101,7 @@ resource "null_resource" "apply_k8s_yamls" {
       kubectl delete job db-migration-job --ignore-not-found
 
       echo "🚀 Aplicando arquivos YAML..."
-      kubectl apply -f ./migration-job.yml -f ./deployment.yml -f ./service.yml
+      kubectl apply -f ./migration-job.yml -f ./mongo-databases.yml -f ./ms-controlepedidos.yml -f ./ms-pedidos.yml -f ./ms-mspagamentos.yml -f ./ms-producao.yml
     EOT
   }
 
