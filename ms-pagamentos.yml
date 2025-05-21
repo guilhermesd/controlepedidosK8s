@@ -35,5 +35,5 @@ spec:
      app: servicopagamentos
   ports:
     - protocol: TCP
-      port: 8081
+      port: 8080
       targetPort: 8080
