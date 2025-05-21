@@ -38,7 +38,7 @@ jobs:
 
     - name: 🪣 Verificar/criar bucket S3
       run: |
-        BUCKET_NAME=bucket-pedidos-terraform
+        BUCKET_NAME=bucket-pedidos-terraform2
         REGION=us-east-1
     
         echo "🔍 Verificando se bucket $BUCKET_NAME já existe..."
