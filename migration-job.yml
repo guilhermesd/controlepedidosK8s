@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: migration
-        image: 439667737553.dkr.ecr.us-east-1.amazonaws.com/migration-repo:latest
+        image: 100527548163.dkr.ecr.us-east-1.amazonaws.com/migration-repo:latest
         env:
         - name: ConnectionStrings__DefaultConnection
           valueFrom:

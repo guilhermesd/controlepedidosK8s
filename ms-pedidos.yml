@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: servicopedidos
-        image: 439667737553.dkr.ecr.us-east-1.amazonaws.com/servicopedidos-repo:latest
+        image: 100527548163.dkr.ecr.us-east-1.amazonaws.com/servicopedidos-repo:latest
         ports:
         - containerPort: 8080
         env:

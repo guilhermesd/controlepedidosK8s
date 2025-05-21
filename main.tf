@@ -2,10 +2,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# Busca a VPC default da região us-east-1
+data "aws_vpc" "default" {
+  default = true
+}
+
 data "aws_subnets" "da_vpc" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [data.aws_vpc.default.id]
   }
 
   filter {
@@ -76,7 +81,7 @@ resource "kubernetes_secret" "app_secrets" {
   }
 
   data = {
-    DefaultConnection = "Server=mysql-pedidos.cy3tr8ibv02w.us-east-1.rds.amazonaws.com;Port=3306;Database=pedidos_db;User=admin;Password=Teste#Teste;"
+    DefaultConnection = "Server=mysql-pedidos.cwwqhgcfbsrd.us-east-1.rds.amazonaws.com:3306;Database=pedidos_db;User=admin;Password=Teste#Teste;"
   }
 
   type = "Opaque"
@@ -95,7 +100,8 @@ resource "null_resource" "apply_k8s_yamls" {
       aws eks update-kubeconfig --region us-east-1 --name pedidos-cluster
 
       echo "🔁 Garantindo que o contexto correto está em uso..."
-      kubectl config use-context arn:aws:eks:us-east-1:439667737553:cluster/pedidos-cluster
+      kubectl config use-context arn:aws:eks:us-east-1:100527548163
+      :cluster/pedidos-cluster
 
       echo "🔁 Deletando Job antigo (se existir)..."
       kubectl delete job db-migration-job --ignore-not-found
