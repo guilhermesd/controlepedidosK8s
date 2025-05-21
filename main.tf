@@ -81,7 +81,7 @@ resource "kubernetes_secret" "app_secrets" {
   }
 
   data = {
-    DefaultConnection = "Server=mysql-pedidos.cwwqhgcfbsrd.us-east-1.rds.amazonaws.com:3306;Database=pedidos_db;User=admin;Password=Teste#Teste;"
+    DefaultConnection = "Server=mysql-pedidos.cwwqhgcfbsrd.us-east-1.rds.amazonaws.com;Port=3306;Database=pedidos_db;User=admin;Password=Teste#Teste;Connection Timeout=30;"
   }
 
   type = "Opaque"
